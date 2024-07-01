@@ -1,6 +1,6 @@
 export default { 
     users: `CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         username TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
@@ -10,7 +10,7 @@ export default {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`,
     demographics: `CREATE TABLE IF NOT EXISTS demographics (
-        id INTEGER PRIMARY KEY,
+        id TEXT PRIMARY KEY,
         age INTEGER,
         gender TEXT,
         ethnicity TEXT,
@@ -18,33 +18,32 @@ export default {
         employment TEXT
     )`,
     households: `CREATE TABLE IF NOT EXISTS households (
-        id INTEGER PRIMARY KEY,
+        id TEXT PRIMARY KEY,
         size INTEGER,
         type TEXT,
         owner BOOL,
         address TEXT
     )`,
     responses: `CREATE TABLE IF NOT EXISTS responses (
-        id INTEGER PRIMARY KEY,
-        user_id INTEGER NOT NULL,
-        house_id INTEGER NOT NULL,
-        demo_id INTEGER NOT NULL,
-        last_updated TIMESTAMP,
-        submission_date TIMESTAMP,
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        house_id TEXT NOT NULL,
+        demo_id TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(id),
         FOREIGN KEY(house_id) REFERENCES houses(id),
         FOREIGN KEY(demo_id) REFERENCES demographics(id)
     )`,
     audit_logs: `CREATE TABLE IF NOT EXISTS audit_logs (
-        id INTEGER PRIMARY KEY,
-        user_id INTEGER,
+        id TEXT PRIMARY KEY,
+        user_id TEXT,
         action TEXT,
         ip_address TEXT,
         date TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(id)
     )`,
     access_controls: `CREATE TABLE IF NOT EXISTS access_controls (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id TEXT PRIMARY KEY,
         role TEXT,
         resource TEXT,
         permission TEXT
