@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { signIn } from "next-auth/react"
+import { useSearchParams } from 'next/navigation';
  
 export default function LoginForm() {
+  const searchParams = useSearchParams()
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,11 +73,11 @@ export default function LoginForm() {
           aria-live="polite"
           aria-atomic="true"
         >
-          {/* {errorMessage && (
+          {searchParams.has('error') && (
             <>
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <p className="text-sm text-red-500">{searchParams.get('error')}</p>
             </>
-          )} */}
+          )}
         </div>
       </div>
     </form>

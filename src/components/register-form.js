@@ -1,9 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
  
 export default function RegisterForm() {
+  const searchParams = useSearchParams()
   const router = useRouter()
 
   const [name, setName] = useState('');
@@ -132,11 +133,11 @@ export default function RegisterForm() {
           {!passwordsMatch && confirmPassword && (
             <p className="text-sm text-red-500">Passwords do not match</p>
           )}
-          {/* {errorMessage && (
+          {searchParams.has('error') && (
             <>
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <p className="text-sm text-red-500">{searchParams.get('error')}</p>
             </>
-          )} */}
+          )}
         </div>
       </div>
     </form>
