@@ -1,22 +1,19 @@
 'use client';
 
-import { useState, useActionState } from 'react';
-import { authenticate } from '../../lib/actions';
+import { useState } from 'react';
+import { signIn } from "next-auth/react"
  
 export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
-    undefined,
-  );
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleSubmit = async () => await signIn('credentials', { email, password })
  
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={handleSubmit} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`mb-3 text-2xl text-black`}>
           Please log in to continue.
@@ -65,8 +62,7 @@ export default function LoginForm() {
         </div>
         <button
           className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600 disabled:bg-gray-400"
-          aria-disabled={isPending}
-          disabled={!email || !password || isPending}
+          disabled={!email || !password}
         >
           Log in
         </button>
@@ -75,11 +71,11 @@ export default function LoginForm() {
           aria-live="polite"
           aria-atomic="true"
         >
-          {errorMessage && (
+          {/* {errorMessage && (
             <>
               <p className="text-sm text-red-500">{errorMessage}</p>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </form>

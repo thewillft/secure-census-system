@@ -1,13 +1,10 @@
 'use client';
 
-import { useState, useActionState } from 'react';
-import { register } from '../../lib/actions';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
  
 export default function RegisterForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    register,
-    undefined,
-  );
+  const router = useRouter()
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -18,11 +15,21 @@ export default function RegisterForm() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value);
+  const handleSubmit = () => fetch(
+    '/api/auth/register', 
+    {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password })
+    }).then(resp => { if (resp.ok) router.push('/login') }).catch(e => console.log(e));
 
   const passwordsMatch = password === confirmPassword;
  
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={handleSubmit} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`mb-3 text-2xl text-black`}>
           Please create an account.
@@ -113,10 +120,9 @@ export default function RegisterForm() {
         </div>
         <button
           className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600 disabled:bg-gray-400"
-          aria-disabled={isPending}
-          disabled={!name || !email || !password || !confirmPassword || !passwordsMatch || isPending}
+          disabled={!name || !email || !password || !confirmPassword || !passwordsMatch}
         >
-          Log in
+          Register
         </button>
         <div
           className="flex h-8 items-end space-x-1"
@@ -126,11 +132,11 @@ export default function RegisterForm() {
           {!passwordsMatch && confirmPassword && (
             <p className="text-sm text-red-500">Passwords do not match</p>
           )}
-          {errorMessage && (
+          {/* {errorMessage && (
             <>
               <p className="text-sm text-red-500">{errorMessage}</p>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </form>

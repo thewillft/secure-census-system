@@ -4,5 +4,7 @@
  * validate against the given schema.
  */
 import submission from './submission'
+import LoginRequest from './login-request'
+import RegisterRequest from './register-request'
 
-module.exports = { submission };
+module.exports = { submission, LoginRequest, RegisterRequest };
