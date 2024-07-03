@@ -1,10 +1,9 @@
 export default { 
     users: `CREATE TABLE IF NOT EXISTS users (
         id TEXT PRIMARY KEY,
-        username TEXT UNIQUE NOT NULL,
+        name TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        salt TEXT NOT NULL,
         role TEXT DEFAULT 'USER',
         last_login TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
