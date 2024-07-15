@@ -1,6 +1,14 @@
-import db from "../../../../../lib/database";
+import db from "../../../../lib/database";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function GET(request, { params: { id } }) {
+    const session = await getServerSession(authOptions);
+    const user_id = session?.user_id
+    if (!session || !user_id) {
+        return Response.json({ error: 'Unauthorized'}, { status: 401 });
+    }
+
     const submissions = await db.query(`
         SELECT 
             R.id as r_id, created_at, 
@@ -17,7 +25,9 @@ export async function GET(request, { params: { id } }) {
     }
     const submission = submissions[0];
 
-    // TODO: check if submission['user_id'] matches authenticated user_id
+    if (user_id != submission['user_id']) {
+        return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     const resp_body = {
         id: submission['r_id'],
