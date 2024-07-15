@@ -37,6 +37,7 @@ export default {
         id TEXT PRIMARY KEY,
         user_id TEXT,
         action TEXT,
+        target TEXT,
         ip_address TEXT,
         date TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(id)
