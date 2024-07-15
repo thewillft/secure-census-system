@@ -8,5 +8,10 @@ Requirements:
 
 Steps:
 1. from the root directory, use `npm install` to autmatically download all required node modules
-2. next use `npm run dev` to launch the dev version of the application (sufficient for demonstration)
-3. navigate to [http://localhost:3000](http://localhost:3000) to see the website live
+2. create a `.env` file in the root directory of this project with the following:
+```
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET=410EYYBwXiCOnBqEN+tQgCCKXwJvZiZ8RKNJHPLwiwc=
+```
+4. next use `npm run dev` to launch the dev version of the application (sufficient for demonstration)
+5. navigate to [http://localhost:3000](http://localhost:3000) to see the website live
