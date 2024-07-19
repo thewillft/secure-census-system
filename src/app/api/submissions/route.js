@@ -45,3 +45,51 @@ export async function POST(request) {
 
     return Response.json({ submission_id }, { status: 200 })
 }
+
+export async function GET(request) {
+    const session = await getServerSession(authOptions);
+    const user_id = session?.user_id
+    if (!session || !user_id) {
+        return Response.json({ error: 'Unauthorized'}, { status: 401 });
+    }
+
+    const submissions = await db.query(`
+        SELECT 
+            R.id as r_id, R.user_id as r_user_id, created_at, 
+            user_id, age, size, type, owner, address,
+            gender, ethnicity, education, employment
+        FROM 
+            responses as R 
+        JOIN demographics as D
+        JOIN households as H
+        WHERE r_user_id = ?;
+    `, user_id);
+    if (submissions.length < 1) {
+        return Response.json({ error: `Submission for user with id ${user_id} not found`}, { status: 404 });
+    }
+    const submission = submissions[0];
+
+    if (user_id != submission['user_id']) {
+        return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const resp_body = {
+        id: submission['r_id'],
+        household: {
+            size: submission['size'],
+            type: submission['type'],
+            owner: submission['owner'],
+            address: submission['address']
+        },
+        demographic: {
+            age: submission['age'],
+            gender: submission['gender'],
+            ethnicity: submission['ethnicity'],
+            education: submission['education'],
+            employment: submission['employment']
+        },
+        created_at: submission['created_at']
+    }
+
+    return Response.json(resp_body, { status: 200 });
+}

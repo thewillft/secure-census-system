@@ -12,7 +12,7 @@ export default function LoginForm() {
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handleSubmit = async () => await signIn('credentials', { email, password })
+  const handleSubmit = async () => await signIn('credentials', { email, password, callbackUrl: '/dashboard' })
  
   return (
     <form action={handleSubmit} className="space-y-3">
