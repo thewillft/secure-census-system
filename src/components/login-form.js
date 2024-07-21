@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn } from "next-auth/react"
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
  
 export default function LoginForm() {
   const searchParams = useSearchParams()
@@ -69,15 +70,12 @@ export default function LoginForm() {
           Log in
         </button>
         <div
-          className="flex h-8 items-end space-x-1"
+          className="flex flex-col items-center h-8 mt-3"
           aria-live="polite"
           aria-atomic="true"
         >
-          {searchParams.has('error') && (
-            <>
-              <p className="text-sm text-red-500">{searchParams.get('error')}</p>
-            </>
-          )}
+          <p>Need an account? Register <Link className="text-blue-500" href={'/register'}>here</Link>.</p>
+          {searchParams.has('error') &&  <p className="text-sm text-red-500">{searchParams.get('error')}</p>}
         </div>
       </div>
     </form>
