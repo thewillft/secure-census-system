@@ -15,3 +15,16 @@ NEXTAUTH_SECRET=410EYYBwXiCOnBqEN+tQgCCKXwJvZiZ8RKNJHPLwiwc=
 ```
 4. next use `npm run dev` to launch the dev version of the application (sufficient for demonstration)
 5. navigate to [http://localhost:3000](http://localhost:3000) to see the website live
+
+## Using the Site
+As a respondent:
+1. nagivate to [http://localhost:3000/register](http://localhost:3000/register)
+2. create an account with any email and password, for example `janewillis@gmail.com` `jwjwjw`, you will b
+3. you will be redirected to the login page if your registration was successful
+4. login with the details you used to register and you will be redirected to the dashboard home page
+5. on the dashboard home page you may fill out the census response form as you wish and press the submit button at the bottom
+6. the page will update, thanking you for your submission, and disallowing any further submission (one response per user)
+7. that's it!
+
+As an admin:
+1. ...
