@@ -19,13 +19,15 @@ SECRET_KEY=xfn9P8L9rIpKtWKj68IZ3G865WfdYXNY
 
 ## Using the Site
 As a respondent:
-1. nagivate to [http://localhost:3000/register](http://localhost:3000/register)
-2. create an account with any email and password, for example `janewillis@gmail.com` `jwjwjw`, you will b
-3. you will be redirected to the login page if your registration was successful
-4. login with the details you used to register and you will be redirected to the dashboard home page
+1. nagivate to [http://localhost:3000/login](http://localhost:3000/login)
+2. enter the following credentials to sign in: `akim@gmail.com` `akakak`
+3. you will be redirected to the dashboard page if successful
 5. on the dashboard home page you may fill out the census response form as you wish and press the submit button at the bottom
 6. the page will update, thanking you for your submission, and disallowing any further submission (one response per user)
 7. that's it!
 
 As an admin:
-1. ...
+1. if you have not, sign in with `akim@gmail.com` `akakak` at [http://localhost:3000/login](http://localhost:3000/login)
+2. navigate to [http://localhost:3000/dashboard/admin](http://localhost:3000/dashboard/admin)
+3. here the audit logs which track every request are visible to the user
+4. that's it!
