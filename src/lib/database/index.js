@@ -1,6 +1,7 @@
 import sqlite3 from 'sqlite3'
 import { open } from 'sqlite'
 import tables from './tables';
+import seed from './seed';
 
 sqlite3.verbose();
 
@@ -27,6 +28,9 @@ class Database {
             const sql = entry[1];
             await this.db.exec(sql);
             console.log('[DATABASE] Created table: ' + tableName)
+        }
+        for (const stmt of seed) {
+            await this.db.exec(stmt);
         }
         this.isSetup = true;
     }
