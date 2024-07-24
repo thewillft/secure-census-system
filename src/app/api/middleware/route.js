@@ -25,7 +25,7 @@ export async function POST(req) {
         VALUES (?, ?, ?, ?, ?, ?)
     `, logId, user_id, action, target, null, (new Date()).toISOString());
 
-    console.log(await db.query(`select * from audit_logs;`))
+    // console.log(await db.query(`select * from audit_logs;`))
 
     // END audit logging middleware
 

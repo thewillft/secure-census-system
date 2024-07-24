@@ -25,7 +25,10 @@ export default function RegisterForm() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, email, password })
-    }).then(resp => { if (resp.ok) router.push('/login') }).catch(e => console.log(e));
+    })
+    .then(resp => { if (!resp.ok) throw('Registration failed') })
+    .then(() => router.push('/login'))
+    .catch(e => console.log(e));
 
   const passwordsMatch = password === confirmPassword;
  

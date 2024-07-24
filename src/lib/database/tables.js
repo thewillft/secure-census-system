@@ -48,4 +48,10 @@ export default {
         resource TEXT,
         permission TEXT
     )`,
+    encryption_keys: `CREATE TABLE IF NOT EXISTS encryption_keys (
+        id TEXT PRIMARY KEY,
+        user_id TEXT,
+        aes_key TEXT,
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )`,
 };

@@ -12,6 +12,7 @@ Steps:
 ```
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET=410EYYBwXiCOnBqEN+tQgCCKXwJvZiZ8RKNJHPLwiwc=
+SECRET_KEY=xfn9P8L9rIpKtWKj68IZ3G865WfdYXNY
 ```
 4. next use `npm run dev` to launch the dev version of the application (sufficient for demonstration)
 5. navigate to [http://localhost:3000](http://localhost:3000) to see the website live

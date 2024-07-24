@@ -4,24 +4,44 @@ import { useEffect, useState } from "react";
 import Card from '../../components/card'
 import DemographicCard from "../../components/demographic-card";
 import HouseholdCard from "../../components/household-card";
+import { aesDecrypt, aesEncrypt } from "../../lib/encryption";
  
 export default function DashboardPage() {
     const [submissionPosted, setSubmissionPosted] = useState(false);
     const [submissionLoaded, setSubmissionLoaded] = useState(false);
+    const [aesKey, setAesKey] = useState('')
+
+    useEffect(() => {
+        // Retrieve the encryption key to encrypt/decrypt submission data
+        // This method is somewhat unsafe, key exchange should be done
+        // using asymmetric encryption for best practice
+        async function fetchKeys() {
+            try {
+                const resp = await fetch('/api/auth/keys');
+                const data = await resp.json();
+                setAesKey(data['aes'])
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        fetchKeys();
+    }, [])
 
     useEffect(() => {
         async function fetchSubmission() {
             try {
                 const resp = await fetch('/api/submissions');
                 const data = await resp.json();
-                setSubmission(data);
+                if (!aesKey) return;
+                const decrypted = aesDecrypt(aesKey, data['data'])
+                setSubmission(JSON.parse(decrypted));
                 setSubmissionLoaded(true)
             } catch (e) {
                 console.log(e);
             }
         }
         fetchSubmission();
-    }, [submissionPosted])
+    }, [aesKey, submissionPosted])
 
     // -- DEMOGRAPHIC DATA -- 
 
@@ -77,7 +97,7 @@ export default function DashboardPage() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(getSubmission())
+            body: JSON.stringify({ data: aesEncrypt(aesKey, JSON.stringify(getSubmission()))})
         }).then(resp => setSubmissionPosted(true)).catch(e => console.log(e));
 
     return (

@@ -3,6 +3,7 @@ import db from "../../../lib/database";
 import { submission } from "../../../lib/schemas";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { aesEncrypt, aesDecrypt } from '../../../lib/encryption'
 
 
 export async function POST(request) {
@@ -14,7 +15,20 @@ export async function POST(request) {
 
     // TODO: check if user already has a submission
 
-    const body = await request.json()
+    const keys = await db.query(`
+        SELECT 
+            aes_key
+        FROM 
+            encryption_keys
+        WHERE user_id = ?;
+    `, user_id);
+    if (keys.length < 1) {
+        return Response.json({ error: `No encryption keys found for user`}, { status: 404 });
+    }
+    const aesKey = keys[0]['aes_key'];
+
+    const encrypted_body = await request.json()
+    const body = JSON.parse(aesDecrypt(aesKey, encrypted_body['data']));
 
     const { error } = submission.validate(body)
     if (error) {
@@ -73,6 +87,18 @@ export async function GET(request) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const keys = await db.query(`
+        SELECT 
+            aes_key
+        FROM 
+            encryption_keys
+        WHERE user_id = ?;
+    `, user_id);
+    if (keys.length < 1) {
+        return Response.json({ error: `No encryption keys found for user`}, { status: 404 });
+    }
+    const aesKey = keys[0]['aes_key'];
+
     const resp_body = {
         id: submission['r_id'],
         household: {
@@ -90,6 +116,8 @@ export async function GET(request) {
         },
         created_at: submission['created_at']
     }
+    
+    const encrypted = aesEncrypt(aesKey, JSON.stringify(resp_body))
 
-    return Response.json(resp_body, { status: 200 });
+    return Response.json({ data: encrypted }, { status: 200 });
 }
