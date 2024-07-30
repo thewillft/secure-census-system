@@ -2,7 +2,7 @@
 
 export default function Card({ title, subtitle, body }) {
     return (
-        <div className="p-3 bg-white rounded border border-2">
+        <div className="p-3 bg-white rounded border border-2 w-full">
             <div className="mb-3">
                 <h1 className="text-lg">
                     {title}
