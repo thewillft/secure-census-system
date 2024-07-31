@@ -1,0 +1,10 @@
+basic boilerplate and database setup - William Tietjen
+data validation - Jay Cazaubon
+user auth frontend - Jay Cazaubon
+user auth backend - Jay Cazaubon
+respondent submissions frontend - William Tietjen
+respondent submissions backend - William Tietjen
+home page - William Tietjen
+admin dashboard page - William Tietjen
+audit logging (middleware) - William Tietjen
+AES encryption - William Tietjen

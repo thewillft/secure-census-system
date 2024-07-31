@@ -9,7 +9,7 @@ export default function BarChartCard({ title, subtitle, labels, data, datasetLab
             title={title}
             subtitle={subtitle}
             body={(
-            <div>
+            <div className="h-64 w-full">
                 {labels && data && <Bar
                 options={{
                     responsive: true,

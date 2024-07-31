@@ -5,7 +5,7 @@ export default async function middleware(req) {
 
     // only run middleware for API routes
     const path = req.nextUrl.pathname
-    if (!path.startsWith('/api') || path.includes('middleware') || path.includes('auth')) {
+    if (path.includes('/api/data') || !path.startsWith('/api') || path.includes('middleware') || path.includes('auth')) {
         return NextResponse.next();
     }
 

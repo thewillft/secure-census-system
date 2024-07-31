@@ -46,7 +46,7 @@ export default function Home() {
           body={null}
         />
       </div>
-      <div className="flex w-3/4 justify-center flex-">
+      <div className="flex w-3/4 justify-center">
         <BarChartCard 
           title={'Age'}
           subtitle={'Breakdown of different ages declared in all responses'}

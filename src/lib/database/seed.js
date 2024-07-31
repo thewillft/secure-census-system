@@ -1,10 +1,11 @@
 export default [
+    "INSERT OR IGNORE INTO users (id, name, email, password, role) VALUES ('1rr1230c-xvc2-4a2d-9644-a6bc22856e21', 'Amy Kim', 'akim@gmail.com', '$2b$10$ioODjKUrIDDh1HJ91Lj3OOBlsV4OfflJUGC8torTDRJV8TSGlp2Pi', 'admin');",
     "INSERT OR IGNORE INTO users (id, name, email, password, role) VALUES ('446bce9d-432d-4ecb-bbe9-e47b066247f8', 'John Doe', 'jdoe@gmail.com', '$2b$10$WDbSAR2E/4dBIIOPHmz/teZ21t9CLdpzsYYqfDAkO3IEDObq/M7Ei', 'admin');",
     "INSERT OR IGNORE INTO demographics (id, age, gender, ethnicity, education, employment) VALUES('aa5524aa-a378-418f-8a26-87fe3c20d218', 23, 'male', 'white', 'masters', 'student');",
     "INSERT OR IGNORE INTO households (id, size, type, owner, address) VALUES ('6103f3e3-e928-48f9-91f7-503738848159', 3, 'house', true, '123 Park Pl, New York, NY, USA');",
     "INSERT OR IGNORE INTO responses (id, user_id, house_id, demo_id) VALUES ('d8a6695b-43d4-4223-adf7-37bc67de2950', '446bce9d-432d-4ecb-bbe9-e47b066247f8', '6103f3e3-e928-48f9-91f7-503738848159', 'aa5524aa-a378-418f-8a26-87fe3c20d218')",
-    "INSERT OR IGNORE INTO users (id, name, email, password, role) VALUES ('15bb660c-e6c2-432d-9124-dfc682856e21', 'Amy Kim', 'akim@gmail.com', '$2b$10$ioODjKUrIDDh1HJ91Lj3OOBlsV4OfflJUGC8torTDRJV8TSGlp2Pi', 'user');",
-    "INSERT OR IGNORE INTO demographics (id, age, gender, ethnicity, education, employment) VALUES('2a953ec0-b25e-47bb-bb5a-d769c24a9c09', 45, 'female', 'asian', 'bachelors', 'employed');",
+    "INSERT OR IGNORE INTO users (id, name, email, password, role) VALUES ('15bb660c-e6c2-432d-9124-dfc682856e21', 'Andrew Kong', 'akong@gmail.com', '$2b$10$ioODjKUrIDDh1HJ91Lj3OOBlsV4OfflJUGC8torTDRJV8TSGlp2Pi', 'user');",
+    "INSERT OR IGNORE INTO demographics (id, age, gender, ethnicity, education, employment) VALUES('2a953ec0-b25e-47bb-bb5a-d769c24a9c09', 34, 'male', 'asian', 'bachelors', 'student');",
     "INSERT OR IGNORE INTO households (id, size, type, owner, address) VALUES ('c802981e-2bd7-41df-83cb-40125a5a01c4', 1, 'apartment', false, '456 Rose Park, New York, NY, USA');",
     "INSERT OR IGNORE INTO responses (id, user_id, house_id, demo_id) VALUES ('90681623-a170-426c-a59e-d9b95e9ea7e1', '15bb660c-e6c2-432d-9124-dfc682856e21', 'c802981e-2bd7-41df-83cb-40125a5a01c4', '2a953ec0-b25e-47bb-bb5a-d769c24a9c09')",
     "INSERT OR IGNORE INTO users (id, name, email, password, role) VALUES ('9ea3369c-a5df-47d0-b574-0589333b7947', 'Matt Bon', 'mbon@gmail.com', '$2b$10$ioODjKUrIDDh1HJ91Lj3OOBlsV4OfflJUGC8torTDRJV8TSGlp2Pi', 'user');",
